@@ -2,7 +2,7 @@ import { jwtVerify } from "jose";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const ACCESS_TOKEN_KEY = "kostify_access_token";
+const ACCESS_TOKEN_KEY = "token";
 
 const PROTECTED_PREFIXES = [
   "/profile",

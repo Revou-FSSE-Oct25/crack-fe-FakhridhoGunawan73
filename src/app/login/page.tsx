@@ -3,8 +3,6 @@
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
-
-import { syncAccessTokenCookie } from "@/lib/storage";
 import { useSearchParams } from "next/navigation";
 
 function LoginForm() {
@@ -30,11 +28,6 @@ function LoginForm() {
         password,
       });
       console.log("Login response:", response.data);
-
-      const { accessToken } = response.data;
-      if (accessToken) {
-        syncAccessTokenCookie(accessToken);
-      }
 
       window.location.href = nextPath;
     } catch (err: any) {

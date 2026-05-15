@@ -16,6 +16,14 @@ export default function Navbar() {
       try {
         const response = await api.get("/auth/profile");
 
+        const user = response.data?.user ?? response.data;
+
+        if (!user || !user.role) {
+          setIsLogin(false);
+          setRole("");
+          return;
+        }
+
         setIsLogin(true);
         setRole(response.data.role);
       } catch {
@@ -35,8 +43,6 @@ export default function Navbar() {
     } finally {
       setIsLogin(false);
       setRole("");
-      document.cookie =
-        "kostify_access_token=; Path=/; Max-Age=0; SameSite=Lax; Secure";
       window.location.href = "/login";
     }
   }

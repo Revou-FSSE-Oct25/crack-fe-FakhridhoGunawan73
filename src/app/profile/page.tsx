@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
-import { clearAccessTokenCookie } from "@/lib/storage";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -17,7 +16,6 @@ export default function ProfilePage() {
         setProfile(response.data);
       } catch (err: any) {
         if (err.response?.status === 401) {
-          clearAccessTokenCookie();
           router.replace("/login");
           return;
         }
@@ -32,7 +30,6 @@ export default function ProfilePage() {
     try {
       await api.post("/auth/logout");
     } finally {
-      clearAccessTokenCookie();
       router.replace("/login");
     }
   }
