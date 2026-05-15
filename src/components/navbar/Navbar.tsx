@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import api from "@/lib/api";
-import { clearAccessTokenCookie } from "@/lib/storage";
 
 export default function Navbar() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
   const [role, setRole] = useState("");
 
@@ -23,6 +23,8 @@ export default function Navbar() {
       } catch {
         setIsLogin(false);
         setRole("");
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -33,9 +35,10 @@ export default function Navbar() {
     try {
       await api.post("/auth/logout");
     } finally {
-      clearAccessTokenCookie();
       setIsLogin(false);
       setRole("");
+      document.cookie =
+        "kostify_access_token=; Path=/; Max-Age=0; SameSite=Lax; Secure";
       window.location.href = "/login";
     }
   }
@@ -55,7 +58,9 @@ export default function Navbar() {
             Home
           </Link>
 
-          {isLogin ? (
+          {isLoading ? (
+            <div className="h-6 w-20 animate-pulse rounded bg-blue-500/50"></div>
+          ) : isLogin ? (
             <>
               {role === "OWNER" || role === "ADMIN" ? (
                 <>
