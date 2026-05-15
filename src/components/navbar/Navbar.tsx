@@ -25,7 +25,7 @@ export default function Navbar() {
         }
 
         setIsLogin(true);
-        setRole(response.data.role);
+        setRole(user.role);
       } catch {
         setIsLogin(false);
         setRole("");
