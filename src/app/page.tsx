@@ -16,6 +16,13 @@ export default function Home() {
   const [kosList, setKosList] = useState<Kos[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
+
+  const filteredKosList = kosList.filter((kos) =>
+    `${kos.name} ${kos.city} ${kos.address}`
+      .toLowerCase()
+      .includes(search.toLowerCase()),
+  );
 
   useEffect(() => {
     async function fetchKos() {
@@ -75,6 +82,15 @@ export default function Home() {
       </section>
 
       <section id="kos-list" className="mx-auto max-w-6xl px-8 py-16">
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Cari kos berdasarkan nama, kota, atau alamat..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-lg border px-4 py-3"
+          />
+        </div>
         <h2 className="mb-6 text-2xl font-bold text-gray-800">
           Daftar Kos Tersedia
         </h2>
@@ -97,9 +113,9 @@ export default function Home() {
           </div>
         )}
 
-        {!loading && !error && kosList.length > 0 && (
+        {!loading && !error && filteredKosList.length > 0 && (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {kosList.map((item) => (
+            {filteredKosList.map((item) => (
               <KosCard
                 key={item.id}
                 id={item.id}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import RoomList from "./RoomList";
 
 type KosDetailPageProps = {
   params: Promise<{
@@ -65,13 +66,15 @@ export default async function KosDetailPage({ params }: KosDetailPageProps) {
             Pilih kamar berdasarkan tipe, fasilitas, dan ketersediaan.
           </p>
 
-          {kos.rooms.length === 0 && (
+          {!kos.rooms || kos.rooms.length === 0 ? (
             <div className="mt-6 rounded-xl bg-white p-8 text-center shadow-sm">
               <p className="text-gray-500">Belum ada kamar.</p>
             </div>
+          ) : (
+            <RoomList rooms={kos.rooms || []} />
           )}
 
-          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {/* <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {kos.rooms.map((room) => (
               <div
                 key={room.id}
@@ -142,7 +145,7 @@ export default async function KosDetailPage({ params }: KosDetailPageProps) {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </section>
       </div>
     </main>
