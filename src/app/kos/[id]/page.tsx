@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
 import RoomList from "./RoomList";
 
 type KosDetailPageProps = {
@@ -26,14 +24,6 @@ type Room = {
   imageUrl: string;
   isAvailable: boolean;
 };
-
-function formatRupiah(price: number) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
 
 export default async function KosDetailPage({ params }: KosDetailPageProps) {
   const { id } = await params;
@@ -73,79 +63,6 @@ export default async function KosDetailPage({ params }: KosDetailPageProps) {
           ) : (
             <RoomList rooms={kos.rooms || []} />
           )}
-
-          {/* <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {kos.rooms.map((room) => (
-              <div
-                key={room.id}
-                className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition hover:shadow-md"
-              >
-                <div className="relative h-48 w-full">
-                  {room.imageUrl ? (
-                    <Image
-                      src={room.imageUrl}
-                      alt={`Kamar ${room.roomNumber}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center bg-gray-200 text-sm text-gray-500">
-                      No Image
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900">
-                        Kamar {room.roomNumber}
-                      </h3>
-
-                      <span className="mt-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
-                        {room.type || "Standard"}
-                      </span>
-                    </div>
-
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                        room.isAvailable
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      {room.isAvailable ? "Tersedia" : "Penuh"}
-                    </span>
-                  </div>
-
-                  <p className="mt-5 text-2xl font-bold text-blue-600">
-                    {formatRupiah(room.price)}
-                  </p>
-
-                  <p className="mt-3 flex-1 text-sm text-gray-600">
-                    {room.facilities || "Fasilitas belum diisi"}
-                  </p>
-
-                  {room.isAvailable ? (
-                    <Link
-                      href={`/bookings/create?roomId=${room.id}`}
-                      className="mt-5 block rounded-lg bg-blue-600 px-4 py-2 text-center font-medium text-white transition hover:bg-blue-700"
-                    >
-                      Booking Kamar
-                    </Link>
-                  ) : (
-                    <button
-                      disabled
-                      className="mt-5 block w-full cursor-not-allowed rounded-lg bg-gray-300 px-4 py-2 font-medium text-gray-500"
-                    >
-                      Tidak Tersedia
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div> */}
         </section>
       </div>
     </main>
