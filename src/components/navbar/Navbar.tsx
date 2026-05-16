@@ -106,7 +106,7 @@ export default function Navbar() {
                   <Link
                     href="/profile"
                     className={
-                      pathname === "/profile" ? "font-bold text-yellow-300" : ""
+                      pathname === "/profile" ? "font-bold text-yellow-350" : ""
                     }
                   >
                     Profile
