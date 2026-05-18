@@ -6,13 +6,31 @@ const api = axios.create({
   withCredentials: true,
 });
 
+const protectedRoutes = [
+  "/profile",
+  "/my-bookings",
+  "/owner",
+  "/bookings/create",
+];
+
+function isProtectedPath(pathname: string) {
+  return protectedRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+}
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401 && typeof window !== "undefined") {
       clearAccessTokenCookie();
       const path = window.location.pathname;
-      if (!path.startsWith("/login") && !path.startsWith("/register")) {
+
+      if (
+        isProtectedPath(path) &&
+        !path.startsWith("/login") &&
+        !path.startsWith("/register")
+      ) {
         window.location.href = `/login?next=${encodeURIComponent(path)}`;
       }
     }
