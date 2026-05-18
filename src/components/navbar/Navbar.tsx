@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { logout } from "@/lib/auth";
 import api from "@/lib/api";
 
 export default function Navbar() {
@@ -29,18 +30,12 @@ export default function Navbar() {
     }
 
     checkAuth();
-  }, []);
+  }, [pathname]);
 
   async function handleLogout() {
-    try {
-      await api.post("/auth/logout");
-    } finally {
-      setIsLogin(false);
-      setRole("");
-      document.cookie =
-        "kostify_access_token=; Path=/; Max-Age=0; SameSite=Lax; Secure";
-      window.location.href = "/login";
-    }
+    setIsLogin(false);
+    setRole("");
+    await logout();
   }
 
   return (
