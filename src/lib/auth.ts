@@ -48,9 +48,7 @@ export async function logout() {
       credentials: "include",
     });
   } catch (error) {
-    console.error("Logout failed:", error);
     if (process.env.NODE_ENV === "development") {
-      console.error("Logout failed", error);
     }
   }
 
@@ -73,7 +71,6 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
 
     return data.user;
   } catch (error) {
-    console.error("Failed to fetch current user:", error);
 
     return null;
   }

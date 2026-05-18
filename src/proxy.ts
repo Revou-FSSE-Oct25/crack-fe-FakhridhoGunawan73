@@ -20,7 +20,6 @@ function isProtectedPath(pathname: string): boolean {
 async function verifyToken(token: string): Promise<any> {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    console.error("[Middleware] JWT_SECRET is not defined");
     return null;
   }
 
@@ -30,7 +29,6 @@ async function verifyToken(token: string): Promise<any> {
     });
     return payload;
   } catch (error) {
-    console.error("[Middleware] Token verification failed:", error);
     return null;
   }
 }
@@ -45,8 +43,6 @@ export async function proxy(request: NextRequest) {
   const raw = request.cookies.get(ACCESS_TOKEN_KEY)?.value;
   const token = raw ? decodeURIComponent(raw) : null;
 
-  console.log("[Middleware] Token present:", !!token);
-
   if (!token) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", pathname);
@@ -54,7 +50,6 @@ export async function proxy(request: NextRequest) {
   }
 
   const payload = await verifyToken(token);
-  console.log("[Middleware] Payload:", payload);
   if (!payload) {
     const login = new URL("/login", request.url);
     login.searchParams.set("next", pathname);

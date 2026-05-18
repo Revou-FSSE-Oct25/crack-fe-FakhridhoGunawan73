@@ -1,36 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kostify Frontend
 
-## Getting Started
+Kostify is a modern boarding house booking platform built with Next.js. This frontend provides user-facing pages for browsing kos, viewing room details, creating bookings, and accessing role-based pages for users and owners.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Live Demo
+
+## Frontend URL
+
+https://crack-fe-fakhridhogunawan73.vercel.app/
+
+## Backend API
+
+https://crack-be-fakhridhogunawan73-production.up.railway.app
+
+---
+
+# Features
+
+- Modern responsive homepage
+- Browse kos list
+- Search kos by name, city, and address
+- Kos detail page
+- Room listing
+- Booking room flow
+- Login page
+- Register page
+- Logout flow
+- Protected pages
+- Role-based navigation
+- Owner dashboard access
+- HTTP-only cookie authentication
+- Axios API integration
+
+---
+
+# Tech Stack
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- Axios
+- Vercel Deployment
+
+---
+
+# Project Structure
+
+```txt
+src/
+├── app/
+│   ├── bookings/
+│   ├── login/
+│   ├── register/
+│   ├── kos/
+│   ├── owner/
+│   └── page.tsx
+├── components/
+├── lib/
+└── proxy.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create .env.local file:
 
-## Learn More
+```txt
+NEXT_PUBLIC_API_BASE_URL=
+JWT_SECRET=
+```
 
-To learn more about Next.js, take a look at the following resources:
+Example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```txt
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-url.up.railway.app
+JWT_SECRET=your_jwt_secret
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
+- NEXT_PUBLIC_API_BASE_URL is used to connect the frontend with the backend API.
+- JWT_SECRET is used by proxy.ts to verify the authentication token for protected routes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Instalation
+
+```txt
+npm install
+```
+
+## Run Development Server
+
+```txt
+npm run dev
+```
+
+Open : http://localhost:3000
+
+## Production Build
+
+```txt
+npm run build
+npm run start
+```
+
+---
+
+| Page               | Description                |
+| ------------------ | -------------------------- |
+| `/`                | Homepage and kos catalogue |
+| `/login`           | User login                 |
+| `/register`        | User registration          |
+| `/kos/[id]`        | Kos detail and room list   |
+| `/bookings/create` | Create booking             |
+| `/my-bookings`     | User booking history       |
+| `/owner/dashboard` | Owner dashboard            |
+| `/profile`         | User profile               |
+
+---
+
+# Authentication Flow
+
+Kostify uses HTTP-only cookie authentication.
+
+## Flow
+
+1. User logs in
+2. Backend sends token inside HTTP-only cookie
+3. Frontend sends requests using withCredentials
+4. proxy.ts protects private routes
+5. User can logout and the cookie is cleared by backend
+
+## Roles
+
+## USER
+
+- Browse kos
+- View room details
+- Create booking
+- View booking history
+
+## OWNER
+
+- Access owner dashboard
+- Manage own kos
+- Manage own rooms
+- View booking requests
+
+## ADMIN
+
+- Full access to all resources
+
+---
+
+# Screenshoots
+
+## Home
+
+![alt text](docs/images/crack-fe-fakhridhogunawan73.vercel.app_.png)
+
+## Login
+
+![alt text](<docs/images/Screenshot (802).png>)
+
+## Register
+
+![alt text](<docs/images/Screenshot (803).png>)
+
+## Kos Detail
+
+![alt text](docs/images/crack-fe-fakhridhogunawan73.vercel.app_kos_2.png)
+
+## Booking
+
+![alt text](<docs/images/Screenshot (804).png>)
+
+## Owner Dashboard
+
+![alt text](<docs/images/Screenshot (805).png>)
+
+# Related Links
+
+## Backend Repository
+
+https://github.com/Revou-FSSE-Oct25/crack-be-FakhridhoGunawan73
+
+## Backend API
+
+https://crack-be-fakhridhogunawan73-production.up.railway.app
+
+## Presentation Slides
+
+https://www.canva.com/design/DAHJu12PqdY/zG8URiKOvIAKniOWSsgsww/edit?utm_content=DAHJu12PqdY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+## Author
+
+Fakhridho Gunawan

@@ -29,7 +29,6 @@ function LoginForm() {
         email,
         password,
       });
-      console.log("Login response:", response.data);
 
       const { accessToken } = response.data;
       if (accessToken) {
