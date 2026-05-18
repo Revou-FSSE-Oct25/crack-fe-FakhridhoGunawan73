@@ -47,7 +47,7 @@ function CreateBookingContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-8">
+    <main className="min-h-screenp-8">
       <div className="mx-auto max-w-xl rounded bg-white p-6 shadow">
         <h1 className="text-2xl font-bold">Booking Kamar</h1>
 

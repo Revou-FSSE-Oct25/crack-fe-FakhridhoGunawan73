@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="mt-20 bg-gray-900 px-8 py-10 text-white">
+    <footer className="bg-gray-900 px-8 py-10 text-white">
       <div className="mx-auto max-w-6xl">
         <h2 className="text-2xl font-bold">Kostify</h2>
 
